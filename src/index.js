@@ -2,27 +2,81 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import styles from "./index.less";
 
-export default class YourComponent extends PureComponent {
+export default class TextCarousel extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {};
   }
+  componentDidMount() {
+    const { source, style } = this.props;
+    if (source && Array.isArray(source) && source.length > 0) {
+      const intervalCount = source.length - 1;
+      const interval = 100 / intervalCount;
+      const keyframesItem = [];
+      const height = parseInt(style.height) || 36;
+      for (let i = 1; i <= intervalCount; i += 1) {
+        let position = (interval * i).toFixed(2);
+        if (position >= 100) {
+          position = 100;
+        }
+        keyframesItem.push(`${position}% {
+            left:0;
+            top:-${i * height}px;
+          }
+        `);
+      }
+      const styleSheet = document.styleSheets[0];
+      const keyframesName = styleSheet.rules[styleSheet.rules.length - 1].name;
+      const keyframesStr = `${keyframesName} {0% {
+          left: 0px;
+          top: 0px;
+        }
+        ${keyframesItem.join("")}
+      }`.replace(/\s+/g, "");
+      const keyframes = `@keyframes ${keyframesStr}`;
+      const keyframes_webdit = `@-webkit-keyframes ${keyframesStr}`; /* Safari 和 Chrome */
+
+      styleSheet.insertRule(keyframes, styleSheet.rules.length);
+      styleSheet.insertRule(keyframes_webdit, styleSheet.rules.length);
+    }
+  }
 
   render() {
-    const { className, style, children } = this.props;
+    const { className, style, source, duration, icon } = this.props;
+    const animationDuration = `${source.length * duration}s`;
 
     return (
-      <div className={`${styles.container} ${className}`} style={style}>
-        自定义组件
-        {children}
+      <div
+        className={`${styles.textCarouselContainer} ${className}`}
+        style={{ ...style, lineHeight: style.height }}
+      >
+        <section className={styles.itemContainer} style={{ animationDuration: animationDuration }}>
+          {source.map((item) => (
+            <div
+              key={item.id}
+              className={styles.item}
+              style={{ height: style.height, lineHeight: style.height }}
+            >
+              {icon}
+              <span className={styles.text}>{item.text}</span>
+            </div>
+          ))}
+        </section>
       </div>
     );
   }
 }
 
-YourComponent.propTypes = {
+TextCarousel.propTypes = {
   className: PropTypes.any,
   style: PropTypes.object,
+  source: PropTypes.array,
+  duration: PropTypes.number,
 };
 
-YourComponent.defaultProps = {};
+TextCarousel.defaultProps = {
+  source: [],
+  duration: 2,
+  style: {},
+  icon: null,
+};

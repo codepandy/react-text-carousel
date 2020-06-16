@@ -1,9 +1,40 @@
-.container {
-  color: seagreen;
-  border: 1px solid seagreen;
-  width: 100px;
-  height: 100px;
-  line-height: 100px;
-  text-align: center;
-  border-radius: 50px;
+@lineHeight: 36px;
+.textCarouselContainer {
+  box-sizing: border-box;
+  background-color: #f8f1f1;
+  height: @lineHeight;
+  line-height: @lineHeight;
+  padding: 0 7px;
+  width: 100%;
+  border-radius: 7px;
+  color: rgba(0, 155, 255, 1);
+  overflow: hidden;
+  position: relative;
+
+  .itemContainer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    animation: carouselTimer 8s infinite;
+    animation-direction: normal;
+  }
+  .item {
+    height: @lineHeight;
+    line-height: @lineHeight;
+    display: flex;
+    align-items: center;
+  }
+  .text {
+    display: inline-block;
+  }
+
+  @keyframes carouselTimer {
+    // 0% {
+    //   left: 0px;
+    //   top: 0px;
+    // }
+  }
+
+  @-webkit-keyframes carouselTimer /* Safari and Chrome */ {
+  }
 }

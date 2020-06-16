@@ -1,6 +1,6 @@
 {
-  "name": "",
-  "version": "1.0.0",
+  "name": "@wenmu/react-text-carousel",
+  "version": "1.0.1",
   "description": "一个文本走马灯组件",
   "main": "./build/bundle.js",
   "files": [
@@ -10,7 +10,7 @@
     "start": "webpack-dev-server --config webpack.dev.js",
     "build": "webpack --config webpack.pro.js",
     "prepub": "npm run build",
-    "pub": "npm publish",
+    "pub": "npm publish --access=public",
     "version": "npm version patch"
   },
   "dependencies": {
@@ -52,9 +52,9 @@
   },
   "license": "ISC",
   "bugs": {
-    "url": "https://github/issues"
+    "url": "https://github.com/codepandy/react-text-carousel/issues"
   },
-  "homepage": "https://github#readme",
+  "homepage": "https://github.com/codepandy/react-text-carousel#readme",
   "browserslist": [
     "defaults",
     "ie > 9",
