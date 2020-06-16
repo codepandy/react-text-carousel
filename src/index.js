@@ -41,8 +41,19 @@ export default class TextCarousel extends PureComponent {
     }
   }
 
+  onClickItem = () => {};
+
   render() {
-    const { className, style, source, duration, icon } = this.props;
+    const {
+      className,
+      style,
+      source,
+      duration,
+      icon,
+      onClick,
+      keyField = "id",
+      textField = "text",
+    } = this.props;
     const animationDuration = `${source.length * duration}s`;
 
     return (
@@ -53,12 +64,15 @@ export default class TextCarousel extends PureComponent {
         <section className={styles.itemContainer} style={{ animationDuration: animationDuration }}>
           {source.map((item) => (
             <div
-              key={item.id}
+              key={item[keyField]}
               className={styles.item}
               style={{ height: style.height, lineHeight: style.height }}
+              onClick={() => {
+                onClick(item);
+              }}
             >
               {icon}
-              <span className={styles.text}>{item.text}</span>
+              <span className={styles.text}>{item[textField]}</span>
             </div>
           ))}
         </section>
@@ -79,4 +93,5 @@ TextCarousel.defaultProps = {
   duration: 2,
   style: {},
   icon: null,
+  onClick: () => {},
 };

@@ -23,6 +23,9 @@ function Main() {
             style={{ width: "18px", height: "16px", display: "inline-block", marginRight: "7px" }}
           />
         }
+        onClick={(item) => {
+          alert(item.text);
+        }}
       />
     </section>
   );
