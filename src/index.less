@@ -15,7 +15,7 @@
     position: absolute;
     left: 0;
     top: 0;
-    animation: carouselTimer 8s infinite;
+    animation-iteration-count: infinite;
     animation-direction: normal;
   }
   .item {
@@ -27,15 +27,5 @@
   }
   .text {
     display: inline-block;
-  }
-
-  @keyframes carouselTimer {
-    // 0% {
-    //   left: 0px;
-    //   top: 0px;
-    // }
-  }
-
-  @-webkit-keyframes carouselTimer /* Safari and Chrome */ {
   }
 }

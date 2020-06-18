@@ -2,6 +2,8 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import styles from "./index.less";
 
+const keyframesName = "text-carousel-keyframesName-key-asdf8324-df324s";
+
 export default class TextCarousel extends PureComponent {
   constructor(props) {
     super(props);
@@ -26,7 +28,8 @@ export default class TextCarousel extends PureComponent {
         `);
       }
       const styleSheet = document.styleSheets[0];
-      const keyframesName = styleSheet.rules[styleSheet.rules.length - 1].name;
+
+      styleSheet.rules[styleSheet.rules.length - 1].name;
       const keyframesStr = `${keyframesName} {0% {
           left: 0px;
           top: 0px;
@@ -57,16 +60,16 @@ export default class TextCarousel extends PureComponent {
     const animationDuration = `${source.length * duration}s`;
 
     return (
-      <div
-        className={`${styles.textCarouselContainer} ${className}`}
-        style={{ ...style, lineHeight: style.height }}
-      >
-        <section className={styles.itemContainer} style={{ animationDuration: animationDuration }}>
+      <div className={`${styles.textCarouselContainer} ${className || ""}`} style={{ ...style }}>
+        <section
+          className={styles.itemContainer}
+          style={{ animationDuration: animationDuration, animationName: keyframesName }}
+        >
           {source.map((item) => (
             <div
               key={item[keyField]}
               className={styles.item}
-              style={{ height: style.height, lineHeight: style.height }}
+              style={style.height ? { height: style.height, lineHeight: style.height } : null}
               onClick={() => {
                 onClick(item);
               }}
