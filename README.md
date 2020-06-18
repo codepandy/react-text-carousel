@@ -50,6 +50,7 @@ import TextCarousel from "@wenmu/react-text-carousel";
 | :-------- | ------ | ---------- | ---------------------------------------------------------------------------------- |
 | className | 空     | Object     | 自定义样式类,css 以 module 的方式引入                                              |
 | style     | 空     | Object     | Object                                                                             | 内嵌样式 |
+| contentStyle     | 空     | Object     | Object                                                                             | 内容样式 |
 | source    | []     | 数组       | 数据源                                                                             |
 | duration  | 2      | number     | 每项持续时间                                                                       |
 | icon      | null   | React.Node | 定义文字开头图标                                                                   |

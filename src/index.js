@@ -5,10 +5,6 @@ import styles from "./index.less";
 const keyframesName = "text-carousel-keyframesName-key-asdf8324-df324s";
 
 export default class TextCarousel extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
   componentDidMount() {
     const { source, style } = this.props;
     if (source && Array.isArray(source) && source.length > 0) {
@@ -27,9 +23,8 @@ export default class TextCarousel extends PureComponent {
           }
         `);
       }
-      const styleSheet = document.styleSheets[0];
+      const styleSheet = document.styleSheets[document.styleSheets.length - 1];
 
-      styleSheet.rules[styleSheet.rules.length - 1].name;
       const keyframesStr = `${keyframesName} {0% {
           left: 0px;
           top: 0px;
@@ -44,18 +39,17 @@ export default class TextCarousel extends PureComponent {
     }
   }
 
-  onClickItem = () => {};
-
   render() {
     const {
       className,
       style,
+      contentStyle,
       source,
       duration,
       icon,
       onClick,
-      keyField = "id",
-      textField = "text",
+      keyField,
+      textField,
     } = this.props;
     const animationDuration = `${source.length * duration}s`;
 
@@ -63,7 +57,11 @@ export default class TextCarousel extends PureComponent {
       <div className={`${styles.textCarouselContainer} ${className || ""}`} style={{ ...style }}>
         <section
           className={styles.itemContainer}
-          style={{ animationDuration: animationDuration, animationName: keyframesName }}
+          style={{
+            animationDuration: animationDuration,
+            animationName: keyframesName,
+            ...contentStyle,
+          }}
         >
           {source.map((item) => (
             <div
@@ -95,6 +93,9 @@ TextCarousel.defaultProps = {
   source: [],
   duration: 2,
   style: {},
+  contentStyle: {},
   icon: null,
   onClick: () => {},
+  keyField: "id",
+  textField: "text",
 };
